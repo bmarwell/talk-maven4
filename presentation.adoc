@@ -1,4 +1,19 @@
 = Maven - was gibt es Neues?
+Benjamin Marwell <bmarwell@apache.org>
+//:revealjs_autoSlide: 5000
+:revealjs_history: true
+:revealjs_fragmentInURL: true
+:revealjs_viewDistance: 5
+:revealjs_width: 1280
+:revealjs_height: 720
+:revealjs_controls: true
+//:revealjs_controlsLayout: edges
+:revealjs_controlsTutorial: true
+:revealjs_slideNumber: c/t
+:revealjs_showSlideNumber: speaker
+//:revealjs_autoPlayMedia: true
+:revealjs_defaultTiming: 42
+:docinfo: shared
 :customcss: talk.css
 :revealjsdir: reveal.js
 :source-highlighter: highlightjs
@@ -78,17 +93,9 @@ aus dem Source-Code-Repository +
 von der deployten pom.xml +
 im Artefakt-Repository +
 
-[.columns]
 === B/C: Bisheriges Verhalten
 
-[.column]
-image::file-icon-xml.svg[{half-width}]
-
-[.column]
-image::file-icon-xml.svg[{half-width}]
-
-[.column]
-image::file-icon-xml.svg[{half-width}]
+image::xml_to_xml.png[{half-width}]
 
 
 [.notes]
@@ -100,17 +107,9 @@ image::file-icon-xml.svg[{half-width}]
 * Tools wie Maven 2 (ja!), SBT, Gradle würden kaputt gehen.
 --
 
-[.columns]
 === B/C: künftiges Verhalten
 
-[.column]
-image::file-icon-xml.svg[]
-
-[.column]
-image::file-icon-xml.svg[]
-
-[.column]
-image::file-icon-xml.svg[]
+image::xml_to_xml_not_same.png[]
 
 [.notes]
 --
