@@ -79,7 +79,9 @@ image::terminal-icon.svg[]
 --
 * java --version
 * mvn --version (nicht installiert)
-* ./mvnw validate => läuft
+* ./mvnw validate => läuft +
+natürlich lädt es das halbe Internet herunter.
+Das ist ja schließlich auch die Aufgabe von Tools wie Maven und NPM...
 * ls \~/.m2/wrapper/dists/apache-m\*
 * git clean -fdX
 * ls \~/.mvn/wrapper/
@@ -94,19 +96,34 @@ aus dem Source-Code-Repository +
 von der deployten pom.xml +
 im Artefakt-Repository +
 
+[.notes]
+* In diesem Satz steckt mehr, als man glauben möchte.
+
 [transition=fade,transition-speed=fast]
-=== B/C: Bisheriges Verhalten
+=== `pom.xml`: Bisheriges Verhalten
 
 image::xml_to_xml.png[{half-width}]
 
 
 [.notes]
 --
-* Die pom.xml wird bei der Installation nach \~/.m2 deployed, bei ‚deploy‘/‘release’ ins remote-repo.
-* Außer beim Maven-flatten-plugin. Aber zu vernachlässigen.
-* Warum ist das so?
-* Wir können mit Maven 4 nicht einfach Elemente ändern, hinzufügen oder gar entfernen.
-* Tools wie Maven 2 (ja!), SBT, Gradle würden kaputt gehen.
+* Die pom.xml wird bei der Installation nach \~/.m2 deployed, bei »deploy«/»release« ins remote-repo.
+* Es gibt Ausnahmen, etwa beim Maven-flatten-plugin. Aber um es einfach zu halten, belassen wir es bei dem Normalfall.
+* Warum ist das so? +
+** Warum können wir Dependency-Koordinaten nicht erweitern?
+** Warum können wir nicht einfach neue Elemente hinzugügen?
+* Genau diese Kopiererei! Wir können mit Maven 4 nicht einfach Elemente ändern, hinzufügen oder gar entfernen.
+* Es sind einfach die gleichen Dateien.
+* Es wirkt wie ein Standard, die `pom.xml`-Datei.
+* 75 % nutzen Maven.
+* Auch viele Tools können Maven nutzen.
+* Was passiert, wenn wir nun Elemente hinzufügen? Oder noch schlimmer: Elemente entfernen?
+* Was passiert, wenn wir nun solch eine Datei hochladen, vielleicht nicht nur in unser Firmen-Repo, sondern nach Maven Central?
+* Nun, es gibt wohl tatsächlich noch Leute, die Maven 2 nutzen!
+* Es soll sogar Leute geben, die SBT oder gar Gradle nutzen!
+Stellt euch das mal vor!
+* Würden wir nun ein neues Dateiformat hochladen, würde es das Eco-System zerstören.
+* Fragen?
 --
 
 [transition=fade,transition-speed=fast]
@@ -116,9 +133,12 @@ image::xml_to_xml_not_same.png[]
 
 [.notes]
 --
-* Build/Consumer-POM Dekopplung heißt:
+* Build/Consumer-POM-Entkopplung heißt also:
 * Das, was auf der Platte ist, ist nicht unbedingt das gleiche wie das, was man hochlädt/installiert.
-* Es wird also die Projekt-POM in eine „Consumer-POM“ transformiert. Damit können wir Maven4-Projekte kompatibel machen.
+* Das was man auf der Festplatte oder in `git` hat, ist also in Maven 4 nicht mehr (unbedingt) das gleiche, was im Repository landet -- egal, ob lokal, im Firmen-Repository oder in Maven Central.
+* Es wird also in Maven 4 die Projekt-POM in eine „Consumer-POM“ transformiert. Damit können wir Maven4-Projekte kompatibel machen.
+* Das was also z.B. in Central landet, ist also ganz sicher kompatibel zu Maven 2 und 3 -- dem *de facto*-Standard.
+* Damit stellen wir sicher, dass dort immer eine gültige Datei liegt.
 --
 
 === Build/Consumer-POM: Zusammenfassung
@@ -127,12 +147,12 @@ image::xml_to_xml_not_same.png[]
 * Entkoppeln der pom.xml aus dem Source-Code-Repository vom deployten pom.xml im Artefakt-Repository.
 * Ermöglicht zukünftige Änderungen (Maven 4) an der pom.xml, ohne andere Build-Systeme zu beeinträchtigen. +
 … und vor allem: 
-* Ohne das komplette Java-Ökosystem zu »zerstören«.
+* Ohne das komplette Java-Ökosystem zu beschädigen.
 
 [.notes]
---
-* Das ist eines der Grundpfeiler von Maven 4. Dadurch können wir das Schema für die pom.xml in Maven 4 anpassen, ohne das Eco-System kaputt zu machen.
-* Würden wir stattdessen die pom.xml GLOBAL anpassen, würden alle neuen pom-Files das Tooling kaputt machen. „Sorry, aber wir wollten Maven erweitern“?
+--zeug
+* Das ist eines der Grundpfeiler von Maven 4. Dadurch können wir das Schema für die pom.xml in Maven 4 anpassen, ohne das Eco-System zu beschädigen.
+* Würden wir stattdessen die pom.xml GLOBAL anpassen, würden alle neuen pom-Files das Tooling kaputt machen. „Sorry, liebes komplette Java-Ökosystem; Sorry, liebe Java-Community. Aber wir wollten Maven erweitern, also müsst ihr euer Tooling Updaten“?
 * So macht man sich bestimmt keine Freunde, oder?
 --
 
@@ -146,5 +166,38 @@ image::terminal-icon.svg[]
 {nbsp}
 
 {nbsp}
+
+[.notes]
+--
+* `mvn --version` (Maven 3)
+* `mvn4 --version` (Maven 4)
+* Ich zeige euch ein paar Änderungen, die mit Maven 3 kaputtgehen, die aber mit Maven 4 funktionieren.
+* Eine Parent-Pom mit vielen Modulen -- hier nur eines.
+* Im Untermodul steht die Parent-Deklaration -- wie immer, auch mit Verisonsangabe.
+* Die Version vom Child-Projekt kann man entfernen -- das geht auch mit Maven 3. +
+Die Version wird vererbt.
+* Wenn ich die Version aus dem Parent entferne, geht es aber nicht mehr mit Maven 3. +
+Es versteht die Parent-Angabe nicht. +
+Was genau ist nochmal die exakte Koordinate, bitte?
+* Aber eigentlich ist das ja ungewöhnlich: Denn was implizit auch in der Parent-Angabe steht, ist der Pfad zur Pom.xml. +
+Der ist `../pom.xml` als Default.
+* Hallo Maven, das kriegst du schon alleine raus, oder? ++:)++  +
+Komm schon, das schaffst du!! (aber nein...)
+* Schade, das nutzen wir doch 99,999 % der Zeit...
+* Auch wenn wir mal noch ein Verzeichnis höher gehen müssten... Maven hallo, kriegst du das bitte auch selbst raus? Nein? Schade...
+* Maven 4 kann es zum Glück! ++:)++
+* Es funktioniert, genauso wie wir es auch erwarten würden. Nur, dass es jetzt *wirklich* funktioniert.
+* Wir haben also einige Elemente entfernt:
+** Beide Versionen
+** $mvn install
+** vim ++~/.m2/repository/...++
+** Maven 4 hat also die Build-Pom genommen
+** Sachen selbst herausgefunden und implizit hinzugefügt
+** ... und genau diese Datei installiert.
+* Kleines Beispiel, aber zeigt ganz gut, was wir vorhaben.
+* Vielleicht auch inter-projekt-Dependencies so auflösen.
+** Warum noch version=++${project.version}++ jedes mal schreiben?
+* Fragen?
+--
 
 == Improved Reactor
