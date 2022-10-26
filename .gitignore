@@ -1,5 +1,2 @@
 target/
 .idea/
-*.html
-!reveal.js/*.html
-!reveal.js/**/*.html

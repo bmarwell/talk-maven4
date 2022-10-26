@@ -14,9 +14,9 @@ Benjamin Marwell <bmarwell@apache.org>
 //:revealjs_autoPlayMedia: true
 :revealjs_defaultTiming: 42
 :docinfo: shared
-// :customcss: css/talk.css
-:revealjsdir: reveal.js-3.9.2
-// :revealjsdir: reveal.js-4.1.2
+:customcss: css/talk.css
+// :revealjsdir: reveal.js-3.9.2
+:revealjsdir: reveal.js-4.1.2
 :source-highlighter: highlightjs
 //:highlightjsdir: highlight.js
 :imagesdir: images
@@ -94,6 +94,7 @@ aus dem Source-Code-Repository +
 von der deployten pom.xml +
 im Artefakt-Repository +
 
+[transition=fade,transition-speed=fast]
 === B/C: Bisheriges Verhalten
 
 image::xml_to_xml.png[{half-width}]
@@ -108,6 +109,7 @@ image::xml_to_xml.png[{half-width}]
 * Tools wie Maven 2 (ja!), SBT, Gradle würden kaputt gehen.
 --
 
+[transition=fade,transition-speed=fast]
 === B/C: künftiges Verhalten
 
 image::xml_to_xml_not_same.png[]

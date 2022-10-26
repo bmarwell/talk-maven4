@@ -1,6 +1,6 @@
+html,
 body,
 .reveal,
 h1, h2, h3, h4 {
-  font-family: 'Libertinus Sans', serif !important;
-  color: white;
+  font-family: 'Libertinus Sans', sans-serif !important;
 }
