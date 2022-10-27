@@ -1,0 +1,3 @@
+[submodule "whats-cooking-maven-demos"]
+	path = whats-cooking-maven-demos
+	url = https://github.com/mthmulders/whats-cooking-maven-demos.git
