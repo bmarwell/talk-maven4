@@ -26,9 +26,11 @@ Benjamin Marwell <bmarwell@apache.org>
 :icons: font
 
 
-== Über mich
+include::01_about.adoc[]
 
 == Inhalt
+
+image::mikolaj-DCzpr09cTXY-unsplash.jpg[background, size=cover]
 
 [%step]
 * Maven Wrapper
@@ -38,119 +40,22 @@ Benjamin Marwell <bmarwell@apache.org>
 
 == Umfrage: Wer nutzt Maven?
 
+image::thomas-chan-0-8mwjp94Pk-unsplash.jpg[background, size=cover]
+
 [%step]
 * Wer nutzt Gradle?
 * Wer nutzt sbt, Leiningen, ant oder andere Tools?
 * Wer nutzt regelmäßig Maven >= 3.8?
-* Wer nutzt Maven => 3.6?
+* Wer nutzt Maven >= 3.6?
 * Wer nutzt ein älteres Maven 3?
 * Wer nutzt Maven 2?
 
-== Maven Wrapper
-
-=== mvnw: Eine kurze Geschichte
-
-[%step]
-* Gestartet von Brian Demers in 2013 als »gradlew«-Klon{empty}footnote:[https://github.com/bdemers/maven-wrapper[]].
-* Von 2013 bis 2021 von takari.io gewartet.
-* Erstes Release als Apache-Projekt im Dezember 2021{empty}footnote:[https://www.mail-archive.com/users@maven.apache.org/msg143562.html[]].
-* Es ist damit ein offizielles Apache-Projekt.
-
-=== Was bietet mvnw?
-
-[%step]
-* Jedes Projekt hat alles, was zum Build benötigt wird (bis auf das JDK).
-* Läuft auf Linux, MacOS, \*BSD, Solaris, AIX, Windows.
-* Lokale Maven-Installationen der Entwickler fallen bei der Fehlersuche nicht mehr ins Gewicht.
-
-[.columns]
-=== mvnw: Demo
-
-[.column]
-{nbsp}
-[.column]
-image::terminal-icon.svg[]
-[.column]
-{nbsp}
-
-{nbsp}
-
-[.notes]
---
-* java --version
-* mvn --version (nicht zu nutzen)
-* ./mvnw validate (nicht installiert)
-* mvn wrapper:wrapper -Dmaven=3.8.6
-* ./mvnw validate => läuft +
-natürlich lädt es das halbe Internet herunter.
-Das ist ja schließlich auch die Aufgabe von Tools wie Maven und NPM...
-* ls \~/.m2/wrapper/dists/apache-m\*
-* git clean -fdX
-* ls \~/.mvn/wrapper/
---
+include::02_mvnw.adoc[]
 
 include::03_build_consumer.adoc[]
 
-== Improved Reactor
+include::04_improved_reactor.adoc[]
 
-footnote:[https://unsplash.com/photos/IdtnNvoP7M0]
+include::05_mvnd.adoc[]
 
-image::mike-u-IdtnNvoP7M0-unsplash_reactor.jpg[background, size=cover]
-
-{nbsp}
-
-{nbsp}
-
-{nbsp}
-
-=== Improved Reactor
-
-[%step]
-* Behebt Probleme mit Multi-Module-Builds
-* Der [.step.highlight-red]#Reactor# erkennt Projekte nun zuverlässig.
-[%step,role="small"]
-** [.small]#Solange man einen `.mvn`-Ordner im Projekt-Root-Verzeichnis hat.#
-
-[.notes]
---
-* Seit Maven 3 gibt es Multi-Module-Builds.
-* Es gab schon immer "Problemchen" dabei. Nichts so schlimmes, das ein Release davon »geblockt« werden würde.
-* Der Reactor:
-** Der Teil von Maven, der
-** Baut das »Mentale« Modell des Projektes zusammen
-** Welche Module gibt es?
-** Gibt es Abhängigkeiten untereinander? Spoiler: Normalerweise ja!
-** Und damit in letzter Konsequenz: In welcher Reihenfolge sollen die Module gebaut werden.
-* (Klick) Größtes Problem: Die Erkennung von Multi-Module-Projekten.
-* Je nach Aufruf wird es nicht erkannt.
-** Oft verwenden solche Leute mvn install und dann mvn test.
-** Würde man mvn -pl mod test ausführen, so würden die Dependencies nämlich aus dem lokalen oder remote-Repo geholt werden.
-** Hier erkennt Maven also den Reaktor nicht.
-* Das ist nun endlich behoben!
-* Auch beim Ausführen von Teilprojekten wird endlich das abhängige projekt-lokale Modul erkannt.
-* (Klick) Es gibt einen ganz kleinen Haken. Man braucht einen `.mvn`-Ordner im Projekt-Root.
-** Wie soll Maven sonst das Ende beim Aufsteigen durch die Verzeichnisse erkennen?
-** Sonst kommt man irgendwann bei `/` an. Das ist ganz bestimmt nicht euer Projekt...
-** Oder bei `C:\\` für die unglücklichen unter euch. Vermtlich auch nicht das Projekt-Root-Verzeichnis.
-* Das Verzeichnis ist übrigens auch derzeit schon oft da.
-* eben dem `mvnw` wie gerade gesehen kann man dort in speziellen Dateien auch Standard-JVM-Options hinterlegen.
-* Wie viele von euch nutzen denn Multi-Module-Projekte?
-* Bei mvn4 muss man also kein `mvn install` mehr ausführen, auch wenn man nur einzelne Module testen möchte.
---
-
-
-[.columns]
-=== mvnw: Demo
-
-[.column]
-{nbsp}
-[.column]
-image::terminal-icon.svg[]
-[.column]
-{nbsp}
-
-{nbsp}
-
-[.notes]
---
---
+include::99_trailer.adoc[]

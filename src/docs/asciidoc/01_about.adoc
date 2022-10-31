@@ -1,0 +1,18 @@
+[.columns]
+== Über mich
+
+[.column.is-one-third]
+--
+--
+
+[.column.has-text-left]
+--
+Benjamin Marwell +
+System Engineer @ +
+{nbsp}{nbsp}Finanz Informatik GmbH {amp} Co. KG +
+Apache Shiro PMC member +
+Apache Maven Committer +
+
+Twitter: @bmarwell
+
+--

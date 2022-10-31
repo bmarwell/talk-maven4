@@ -1,0 +1,51 @@
+
+== Maven Wrapper
+
+image::jiawei-zhao-W-ypTC6R7_k-unsplash.jpg[background, size=cover]
+
+{nbsp}
+
+{nbsp}
+
+{nbsp}
+
+=== mvnw: Eine kurze Geschichte
+
+[%step]
+* Gestartet von Brian Demers in 2013 als »gradlew«-Klon{empty}footnote:[https://github.com/bdemers/maven-wrapper[]].
+* Von 2013 bis 2021 von takari.io gewartet.
+* Erstes Release als Apache-Projekt im Dezember 2021{empty}footnote:[https://www.mail-archive.com/users@maven.apache.org/msg143562.html[]].
+* Es ist damit ein offizielles Apache-Projekt.
+
+=== Was bietet mvnw?
+
+[%step]
+* Jedes Projekt hat alles, was zum Build benötigt wird (bis auf das JDK).
+* Läuft auf Linux, MacOS, ++*BSD++, Solaris, AIX, Windows.
+* Lokale Maven-Installationen der Entwickler fallen bei der Fehlersuche nicht mehr ins Gewicht.
+
+[.columns]
+=== mvnw: Demo
+
+[.column]
+{nbsp}
+[.column]
+image::terminal-icon.svg[]
+[.column]
+{nbsp}
+
+{nbsp}
+
+[.notes]
+--
+* java --version
+* mvn --version (nicht zu nutzen)
+* ./mvnw validate (nicht installiert)
+* mvn wrapper:wrapper -Dmaven=3.8.6
+* ./mvnw validate => läuft +
+natürlich lädt es das halbe Internet herunter.
+Das ist ja schließlich auch die Aufgabe von Tools wie Maven und NPM...
+* ls \~/.m2/wrapper/dists/apache-m\*
+* git clean -fdX
+* ls \~/.mvn/wrapper/
+--

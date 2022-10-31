@@ -1,5 +1,19 @@
 
+[.columns]
 == Build/Consumer POM
+
+[.column]
+image:c-d-x-uHSiDTptzV4-unsplash.jpg[] +
+Build
+
+{nbsp}
+
+[.column]
+image:bernard-hermant-nHRXNv2qeDE-unsplash.jpg[] +
+Consumer
+
+{nbsp}
+
 
 === Worum geht es?
 
@@ -9,7 +23,9 @@ von der deployten pom.xml +
 im Artefakt-Repository +
 
 [.notes]
+--
 * In diesem Satz steckt mehr, als man glauben möchte.
+--
 
 [transition=fade,transition-speed=fast]
 === `pom.xml`: Bisheriges Verhalten

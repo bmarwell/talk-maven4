@@ -1,0 +1,75 @@
+
+== Improved Reactor
+
+image::mike-u-IdtnNvoP7M0-unsplash_reactor.jpg[background, size=cover]
+
+{nbsp}
+
+{nbsp}
+
+{nbsp}
+
+=== Improved Reactor
+
+[%step]
+* Behebt Probleme mit Multi-Module-Builds
+* Der [.step.highlight-red]#Reactor# erkennt Projekte nun zuverlässig.
+[%step,role="small"]
+** [.small]#Solange man einen `.mvn`-Ordner im Projekt-Root-Verzeichnis hat.#
+
+[.notes]
+--
+* Seit Maven 3 gibt es Multi-Module-Builds.
+* Es gab schon immer "Problemchen" dabei. Nichts so schlimmes, das ein Release davon »geblockt« werden würde.
+* Der Reactor:
+** Der Teil von Maven, der
+** Baut das »Mentale« Modell des Projektes zusammen
+** Welche Module gibt es?
+** Gibt es Abhängigkeiten untereinander? Spoiler: Normalerweise ja!
+** Und damit in letzter Konsequenz: In welcher Reihenfolge sollen die Module gebaut werden.
+* (Klick) Größtes Problem: Die Erkennung von Multi-Module-Projekten.
+* Je nach Aufruf wird es nicht erkannt.
+** Oft verwenden solche Leute mvn install und dann mvn test.
+** Würde man mvn -pl mod test ausführen, so würden die Dependencies nämlich aus dem lokalen oder remote-Repo geholt werden.
+** Hier erkennt Maven also den Reaktor nicht.
+* Das ist nun endlich behoben!
+* Auch beim Ausführen von Teilprojekten wird endlich das abhängige projekt-lokale Modul erkannt.
+* (Klick) Es gibt einen ganz kleinen Haken. Man braucht einen `.mvn`-Ordner im Projekt-Root.
+** Wie soll Maven sonst das Ende beim Aufsteigen durch die Verzeichnisse erkennen?
+** Sonst kommt man irgendwann bei `/` an. Das ist ganz bestimmt nicht euer Projekt...
+** Oder bei `C:\\` für die unglücklichen unter euch. Vermtlich auch nicht das Projekt-Root-Verzeichnis.
+* Das Verzeichnis ist übrigens auch derzeit schon oft da.
+* eben dem `mvnw` wie gerade gesehen kann man dort in speziellen Dateien auch Standard-JVM-Options hinterlegen.
+* Wie viele von euch nutzen denn Multi-Module-Projekte?
+* Bei mvn4 muss man also kein `mvn install` mehr ausführen, auch wenn man nur einzelne Module testen möchte.
+--
+
+
+[.columns]
+=== Improved Reactor: Demo
+
+[.column]
+{nbsp}
+[.column]
+image::terminal-icon.svg[]
+[.column]
+{nbsp}
+
+{nbsp}
+
+[.notes]
+--
+* mvn3 - Projekt schlägt fehl
+* Maven sagt freundlicherweise was zum resume (u.a. `-rf`).
+* Schlägt fehlt "could not resolve dep for projekt" -- schlägt also fehl, weil im gleichen Projekt ein Modul nicht gefunden wurde.
+Es ist nicht "projekt-aware".
+* Fix: `return new GroundCoffee()` in `BeanGrinderImpl()` -- geht trotzdem nicht.
+* mvn4 test =\> Test schlägt fehl. Jetzt aber: `mvn -r`!
+* Jetzt ist es endlich weiterhin ein Testfehler, nicht mehr ein Modul-fehler.
+* `-r` vs `-rf`: Ein Fall von: Maven, du WEISST welches Modul fehlgeschlagen ist, oder? Finde es doch bitte selbst heraus.
+* `target/resume.properties`
+* Test nochmal beheben, `mvn test -r`. Geht alles.
+* Funktioniert auch mit `-pl` (project list) und `-f` (pom file).
+* Profile activation `-P` funktioniert nun auch wie project-selection. Wenn es nicht existiert, schlägt es nicht mehr fehl.
+* Fragen?
+--
