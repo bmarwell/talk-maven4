@@ -1,6 +1,25 @@
+[.columns]
 == Dankeschön!
 
-*Quellenangaben:*
+[.column.has-text-left]
+--
+Referenz-Projekte:
+
+image::github-demos.png[]
+--
+
+
+[.column.has-text-left]
+--
+*Twitter:*
+
+🐦 @mthmulders
+
+🐦 @bmarwell
+--
+
+
+=== Quellenangaben
 
 * »magic book, black background, paper* by Mikołaj, +
 https://unsplash.com/photos/DCzpr09cTXY[]

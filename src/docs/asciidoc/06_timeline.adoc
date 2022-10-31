@@ -1,0 +1,50 @@
+== Timeline
+
+=== mvnw: Maven Daemon
+
+[%step]
+* ✅ [.step.highlight-red]#Bereits schon# verfügbar.
+* ✅ Funktioniert mit Maven 3.
+
+=== Build/consumer-pom
+
+[%step]
+* ⚠️ Erst ab [.step.highlight-red]#Maven 4#.
+* ⚠ Einige Plugins benötigen ein Update / Ersatz
+
+[.notes]
+--
+* Z.B. das Plugin zum Signieren der Artefakte.
+--
+
+=== Improved Reactor
+
+[%step]
+⚠️ Erst ab [.step.highlight-red]#Maven 4#.
+
+
+=== mvnd: Maven Daemon
+
+[%step]
+* ✅ [.step.highlight-red]#Bereits schon# verfügbar.
+* ✅ Über z.B. sdkman, chocolatey, etc.
+* ⚠️ +++<del>+++Nicht auf Mac arm64 verfügbar+++</del>+++ Behoben mit v0.8.2, anfang Oktober!
+* ⚠️ Alle Plugins müssen Thread-Safe sein.
+
+=== Zusammenfassung
+
+|===
+| Feature | Status
+
+|mvnw
+|✅
+
+| Build-/Consumer
+|⚠️
+
+| Improved Reactor
+|⚠️
+
+|mvnd
+|✅
+|===

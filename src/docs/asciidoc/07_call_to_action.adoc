@@ -1,0 +1,12 @@
+== Wir brauchen eure Hilfe!
+
+* 🧪 Bitte testet Maven 4 schon heute!
+* 🧾 Bug-Report erstellen
+* 🔨 Und im Idealfall: ein »reprex« beilegen. +
+(minimal, reproducible example)
+
+[.notes]
+--
+* Bug-Tracker: Eventuell keine neuen Konten verfügbar, bitte im Slack oder auf der Mailing-Liste fragen.
+* Diese Beispiele gehen direkt in das Maven-Projekt als Integrationstest ein.
+--

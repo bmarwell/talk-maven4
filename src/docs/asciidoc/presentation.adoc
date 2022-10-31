@@ -58,4 +58,8 @@ include::04_improved_reactor.adoc[]
 
 include::05_mvnd.adoc[]
 
+include::06_timeline.adoc[]
+
+include::07_call_to_action.adoc[]
+
 include::99_trailer.adoc[]

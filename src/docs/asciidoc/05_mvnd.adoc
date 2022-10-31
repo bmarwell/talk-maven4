@@ -1,1 +1,41 @@
-= mvnd (Maven Daemon)
+== mvnd (Maven Daemon)
+
+image::mvnd.png[background, size=cover]
+
+=== mvnd -- worum geht es?
+
+[%step]
+* Schneller Maven-Builds durch einen [.step.highlight-red]#daemon#-Prozess
+* Hält die JVM »warm«.
+* Multi-Threaded build als Standard-Verhalten, ohne die Bildschirmausgabe unleserlich zu gestalten.
+
+[.notes]
+--
+* Inspiriert wie der mvnw vom gradlew -- also mvnd vom gradle-daemon.
+* Warm im Sinne von: Die JVM bleibt am Laufen, weil wir vermutlich den nächsten Build in wenigen Minuten ausführen. +
+Jedes Mal eine neue JVM und die POM.xml, etc. neu laden -- was für eine Zeitverschwendung. Und zwar derzeit jedes Mal!
+* Wirklich nett ist die Veränderung, dass Multi-Threaded Builds als Default genutzt werden.
+* Bildschirmausgabe bleibt lesbar.
+* Schon mal `mvn -T4` versucht? Die Threads »spammen« die Console, man weiß nicht welche Ausgabe zu welchem Projekt gehört.
+* Behält die Ausgabe im Speicher, bis der Build durch ist.
+--
+
+
+[.columns]
+=== mvnd: Demo
+
+[.column]
+{nbsp}
+[.column]
+image::terminal-icon.svg[]
+[.column]
+{nbsp}
+
+{nbsp}
+
+[.notes]
+--
+* `mvn -T5 package` auf maven-codebase
+* `mvnd package` auf mavne-codease
+* mvnd kann noch mehr.
+--
